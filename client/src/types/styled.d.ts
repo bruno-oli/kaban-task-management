@@ -11,7 +11,8 @@ declare module "styled-components" {
       alternativeTextColor: string;
       deleteColor: string;
       borderColor: string;
-      white: string,
+      white: string;
+      secondaryButtonCollor: string;
     };
     fontSizes: {
       headingX: string;

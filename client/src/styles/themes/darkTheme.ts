@@ -9,6 +9,7 @@ const darkTheme = {
     deleteColor: "#EA5555",
     borderColor: "#3E3F4E",
     white: "#FFFFFF",
+    secondaryButtonCollor: "#FFFFFF",
   },
   fontSizes: {
     headingX: "24px",

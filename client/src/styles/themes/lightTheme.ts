@@ -1,3 +1,5 @@
+import { transparentize } from "polished";
+
 const lightTheme = {
   colors: {
     bodyBackground: "#F4F7FD",
@@ -9,6 +11,7 @@ const lightTheme = {
     deleteColor: "#EA5555",
     borderColor: "#E4EBFA",
     white: "#FFFFFF",
+    secondaryButtonCollor: transparentize(0.9, "#635FC7"),
   },
   fontSizes: {
     headingX: "24px",

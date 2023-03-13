@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import styled, { ThemeContext } from "styled-components";
 import Switch from "react-switch";
 
@@ -7,6 +7,7 @@ import iconBoard from "../assets/icon-board-add.svg";
 import iconDarkTheme from "../assets/icon-dark-theme.svg";
 import iconLightTheme from "../assets/icon-light-theme.svg";
 import { ThemeAppContext } from "../contexts/ThemeAppContext";
+import InputNewBoard from "../components/dialogs/InputNewBoard";
 
 const Wrapper = styled.nav`
   grid-area: navbar;
@@ -59,12 +60,16 @@ const Wrapper = styled.nav`
 const NavBar = () => {
   const { isDarkTheme, setIsDarkTheme } = useContext(ThemeAppContext);
   const { colors } = useContext(ThemeContext);
+
+  const refDialog = useRef<HTMLDialogElement>(null);
+
   return (
     <Wrapper>
+      <InputNewBoard refProp={refDialog} />
       <div className="boards">
         <h2>ALL BOARS (5)</h2>
         <div className="items"></div>
-        <button>
+        <button onClick={() => refDialog.current?.showModal()}>
           <img src={iconBoard} alt="" /> + Create New Board
         </button>
       </div>

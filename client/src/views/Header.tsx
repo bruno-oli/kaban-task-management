@@ -7,6 +7,7 @@ import logoLight from "../assets/logoLight.svg";
 import logoDark from "../assets/logoDark.svg";
 import { ThemeAppContext } from "../contexts/ThemeAppContext";
 import iconVerticalElipsis from "../assets/icon-vertical-ellipsis.svg";
+import Button from "../components/Button";
 
 const Wrapper = styled.header`
   display: flex;
@@ -36,23 +37,6 @@ const Wrapper = styled.header`
       display: flex;
       gap: 24px;
       align-items: center;
-      button {
-        cursor: pointer;
-        width: 164px;
-        height: 48px;
-        border-radius: 24px;
-        border: none;
-        outline: none;
-        color: ${(props) => props.theme.colors.white};
-        background: ${(props) => props.theme.colors.primaryColor};
-        font-weight: bold;
-        font-size: ${(props) => props.theme.fontSizes.headingM};
-        transition: background 0.3s;
-        &:hover {
-          background: ${(props) =>
-            transparentize("0.5", props.theme.colors.primaryColor)};
-        }
-      }
       img {
         cursor: pointer;
       }
@@ -71,7 +55,7 @@ const Header = () => {
       <div className="content">
         <h1>Platform Lauch</h1>
         <div>
-          <button>+ Add New Task</button>
+          <Button type="primary" size="large" width="164px">+ Add New Task</Button>
           <img src={iconVerticalElipsis} alt="" />
         </div>
       </div>

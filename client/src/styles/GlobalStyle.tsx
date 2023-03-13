@@ -9,8 +9,13 @@ const GlobalTheme = createGlobalStyle`
   }
   body {
     background-color: ${(props) => props.theme.colors.bodyBackground};
+    .notification__box {
+      z-index: 4;
+      background-color: ${(props) => props.theme.colors.elementBackground};
+      color: ${(props) => props.theme.colors.textColor};
+    }
   }
-  h1, h2, h3, span, a {
+  h1, h2, h3, span, a, label, input {
     color: ${(props) => props.theme.colors.textColor};
   }
 `;
