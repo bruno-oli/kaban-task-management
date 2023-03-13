@@ -14,7 +14,7 @@ export interface IColumn {
   tasks: ITask[];
 }
 
-interface IBoard {
+export interface IBoard {
   id: string;
   name: string;
   columns: IColumn[];

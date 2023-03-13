@@ -8,6 +8,7 @@ import logoDark from "../assets/logoDark.svg";
 import { ThemeAppContext } from "../contexts/ThemeAppContext";
 import iconVerticalElipsis from "../assets/icon-vertical-ellipsis.svg";
 import Button from "../components/Button";
+import { BoardsContext } from "../contexts/BoardsContext";
 
 const Wrapper = styled.header`
   display: flex;
@@ -46,7 +47,6 @@ const Wrapper = styled.header`
 
 const Header = () => {
   const { isDarkTheme } = useContext(ThemeAppContext);
-  const { colors } = useContext(ThemeContext);
   return (
     <Wrapper>
       <div className="logo__container">
@@ -55,7 +55,9 @@ const Header = () => {
       <div className="content">
         <h1>Platform Lauch</h1>
         <div>
-          <Button type="primary" size="large" width="164px">+ Add New Task</Button>
+          <Button type="primary" size="large" width="164px">
+            + Add New Task
+          </Button>
           <img src={iconVerticalElipsis} alt="" />
         </div>
       </div>
