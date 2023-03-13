@@ -47,13 +47,14 @@ const Wrapper = styled.header`
 
 const Header = () => {
   const { isDarkTheme } = useContext(ThemeAppContext);
+  const { activeBoard } = useContext(BoardsContext);
   return (
     <Wrapper>
       <div className="logo__container">
         <img src={isDarkTheme ? logoLight : logoDark} alt="logo" />
       </div>
       <div className="content">
-        <h1>Platform Lauch</h1>
+        <h1>{activeBoard?.name}</h1>
         <div>
           <Button type="primary" size="large" width="164px">
             + Add New Task

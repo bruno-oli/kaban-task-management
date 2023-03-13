@@ -76,7 +76,7 @@ const NavBar = () => {
         <h2>ALL BOARS ({boards.length})</h2>
         <div className="items">
           {boards.map((i) => {
-            return <BoardCard item={i} />;
+            return <BoardCard item={i} key={i.id} />;
           })}
         </div>
         <button onClick={() => refDialog.current?.showModal()}>

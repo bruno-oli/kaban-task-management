@@ -130,7 +130,7 @@ const InputNewBoard = ({
       setColumns([
         ...columns,
         {
-          id: crypto.randomUUID(),
+          id: `${columns.length + 1}`,
           name: "",
           tasks: [],
           color: getRandomColor(),
@@ -174,7 +174,7 @@ const InputNewBoard = ({
       setBoards([
         ...boards,
         {
-          id: crypto.randomUUID(),
+          id: `${boards.length + 1}`,
           name,
           columns,
         },

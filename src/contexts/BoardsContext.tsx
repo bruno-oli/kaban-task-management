@@ -25,18 +25,20 @@ interface IContext {
   setColumns: (newState: IColumn[]) => void;
   boards: IBoard[];
   setBoards: (newState: IBoard[]) => void;
+  activeBoard: IBoard | null;
+  setActiveBoard: (newState: IBoard) => void;
 }
 
 export const INITIAL_BOARDS_VALUE: IContext = {
   columns: [
     {
-      id: crypto.randomUUID(),
+      id: "1",
       name: "Todo",
       tasks: [],
       color: getRandomColor(),
     },
     {
-      id: crypto.randomUUID(),
+      id: "2",
       name: "Doing",
       tasks: [],
       color: getRandomColor(),
@@ -45,28 +47,69 @@ export const INITIAL_BOARDS_VALUE: IContext = {
   setColumns: () => {},
   boards: [
     {
-      id: crypto.randomUUID(),
+      id: "1",
       name: "Welcome!",
       columns: [],
     },
   ],
   setBoards: () => {},
+  activeBoard: null,
+  setActiveBoard: () => {},
 };
 
 export const BoardsContext = createContext<IContext>(INITIAL_BOARDS_VALUE);
 
 const BoardsProvider = ({ children }: { children: React.ReactNode }) => {
-  const [columns, setColumns] = useState<IColumn[]>(INITIAL_BOARDS_VALUE.columns);
+  const [columns, setColumns] = useState<IColumn[]>(
+    INITIAL_BOARDS_VALUE.columns
+  );
 
   // * Final Board
   const [boards, setBoards] = useState<IBoard[]>(INITIAL_BOARDS_VALUE.boards);
 
+  // * Active Board
+  const [activeBoard, setActiveBoard] = useState<IBoard>(
+    INITIAL_BOARDS_VALUE.boards[0]
+  );
+
+  const [isLoading, setIsLoading] = useState(true)
+
+  // * Get boards from local storage
   useEffect(() => {
-    console.log(boards);
+    function getBoards() {
+      if (localStorage.getItem("boards")) {
+        setBoards(
+          JSON.parse(
+            localStorage.getItem("boards") || `${INITIAL_BOARDS_VALUE.boards}`
+          )
+        );
+      }
+      setIsLoading(false);
+    }
+    getBoards();
+  }, []);
+
+  // * Set theme in local storage
+  useEffect(() => {
+    function setBoards() {
+      if (isLoading === false) {
+        localStorage.setItem("boards", JSON.stringify(boards));
+      }
+    }
+    setBoards();
   }, [boards]);
 
   return (
-    <BoardsContext.Provider value={{ columns, setColumns, boards, setBoards }}>
+    <BoardsContext.Provider
+      value={{
+        columns,
+        setColumns,
+        boards,
+        setBoards,
+        activeBoard,
+        setActiveBoard,
+      }}
+    >
       {children}
     </BoardsContext.Provider>
   );
