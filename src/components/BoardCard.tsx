@@ -4,6 +4,7 @@ import { BoardsContext, IBoard } from "../contexts/BoardsContext";
 
 import iconBoard from "../assets/icon-board.svg";
 import iconBoardActive from "../assets/icon-board-active.svg";
+import useActiveBoard from "../hooks/useActiveBoard";
 
 const Wrapper = styled.div`
   cursor: pointer;
@@ -43,10 +44,11 @@ const Wrapper = styled.div`
 `;
 
 const BoardCard = ({ item }: { item: IBoard }) => {
-  const { setActiveBoard, activeBoard } = useContext(BoardsContext);
+  const { setActiveBoardId } = useContext(BoardsContext);
+  const activeBoard = useActiveBoard();
   return (
     <Wrapper
-      onClick={() => setActiveBoard(item)}
+      onClick={() => setActiveBoardId(item.id)}
       className={activeBoard?.id === item.id ? "active" : ""}
     >
       <img

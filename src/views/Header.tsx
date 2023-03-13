@@ -9,6 +9,7 @@ import { ThemeAppContext } from "../contexts/ThemeAppContext";
 import iconVerticalElipsis from "../assets/icon-vertical-ellipsis.svg";
 import Button from "../components/Button";
 import { BoardsContext } from "../contexts/BoardsContext";
+import useActiveBoard from "../hooks/useActiveBoard";
 
 const Wrapper = styled.header`
   display: flex;
@@ -47,7 +48,7 @@ const Wrapper = styled.header`
 
 const Header = () => {
   const { isDarkTheme } = useContext(ThemeAppContext);
-  const { activeBoard } = useContext(BoardsContext);
+  const activeBoard = useActiveBoard();
   return (
     <Wrapper>
       <div className="logo__container">

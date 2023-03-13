@@ -2,20 +2,20 @@ import React, { createContext, useEffect, useState } from "react";
 import getRandomColor from "../functions/getRandomColor";
 
 export interface ITask {
-  id: string;
+  id: number;
   description: string;
   status: IColumn;
 }
 
 export interface IColumn {
-  id: string;
+  id: number;
   name: string;
   color: string;
   tasks: ITask[];
 }
 
 export interface IBoard {
-  id: string;
+  id: number;
   name: string;
   columns: IColumn[];
 }
@@ -25,20 +25,20 @@ interface IContext {
   setColumns: (newState: IColumn[]) => void;
   boards: IBoard[];
   setBoards: (newState: IBoard[]) => void;
-  activeBoard: IBoard | null;
-  setActiveBoard: (newState: IBoard) => void;
+  activeBoardId: number;
+  setActiveBoardId: (newState: number) => void;
 }
 
 export const INITIAL_BOARDS_VALUE: IContext = {
   columns: [
     {
-      id: "1",
+      id: 1,
       name: "Todo",
       tasks: [],
       color: getRandomColor(),
     },
     {
-      id: "2",
+      id: 2,
       name: "Doing",
       tasks: [],
       color: getRandomColor(),
@@ -47,14 +47,14 @@ export const INITIAL_BOARDS_VALUE: IContext = {
   setColumns: () => {},
   boards: [
     {
-      id: "1",
+      id: 1,
       name: "Welcome!",
       columns: [],
     },
   ],
   setBoards: () => {},
-  activeBoard: null,
-  setActiveBoard: () => {},
+  activeBoardId: 1,
+  setActiveBoardId: () => {},
 };
 
 export const BoardsContext = createContext<IContext>(INITIAL_BOARDS_VALUE);
@@ -68,11 +68,11 @@ const BoardsProvider = ({ children }: { children: React.ReactNode }) => {
   const [boards, setBoards] = useState<IBoard[]>(INITIAL_BOARDS_VALUE.boards);
 
   // * Active Board
-  const [activeBoard, setActiveBoard] = useState<IBoard>(
-    INITIAL_BOARDS_VALUE.boards[0]
+  const [activeBoardId, setActiveBoardId] = useState(
+    INITIAL_BOARDS_VALUE.activeBoardId
   );
 
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
   // * Get boards from local storage
   useEffect(() => {
@@ -106,8 +106,8 @@ const BoardsProvider = ({ children }: { children: React.ReactNode }) => {
         setColumns,
         boards,
         setBoards,
-        activeBoard,
-        setActiveBoard,
+        activeBoardId,
+        setActiveBoardId,
       }}
     >
       {children}

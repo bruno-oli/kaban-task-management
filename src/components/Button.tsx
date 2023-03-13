@@ -17,7 +17,7 @@ interface IButton {
   type: "primary" | "secondary" | "destructive";
   size: "large" | "small";
   children: React.ReactNode;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: () => void;
 }
 
 const Button = ({
