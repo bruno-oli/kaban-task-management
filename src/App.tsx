@@ -9,6 +9,8 @@ import Container from "./styles/Container";
 import NavBar from "./views/NavBar";
 import BoardsProvider from "./contexts/BoardsContext";
 import { ToastContainer } from "react-toastify";
+import Content from "./views/Content";
+import NavComportamentProvider from "./contexts/NavComportamentContext";
 
 function App() {
   const { isDarkTheme } = useContext(ThemeAppContext);
@@ -17,10 +19,13 @@ function App() {
       <GlobalTheme />
       <ToastContainer />
       <BoardsProvider>
-        <Container>
-          <Header />
-          <NavBar />
-        </Container>
+        <NavComportamentProvider>
+          <Container>
+            <Header />
+            <NavBar />
+            <Content />
+          </Container>
+        </NavComportamentProvider>
       </BoardsProvider>
     </ThemeProvider>
   );

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { NavComportamentContext } from "../contexts/NavComportamentContext";
 
-const Container = styled.main`
+const Wrapper = styled.main`
   width: 100vw;
   height: 100vh;
   display: grid;
@@ -10,6 +11,20 @@ const Container = styled.main`
   grid-template-areas:
     "header header"
     "navbar content";
+  transition: 0.6s;
+  &.hideen {
+    grid-template-columns: 0% 100%;
+    nav {
+      visibility: hidden;
+      transition: opacity 0.6s;
+      opacity: 0;
+    }
+  }
 `;
+
+const Container = ({ children }: { children: React.ReactNode }) => {
+  const { isHideen } = useContext(NavComportamentContext);
+  return <Wrapper className={isHideen ? "hideen" : ""}>{children}</Wrapper>;
+};
 
 export default Container;

@@ -44,11 +44,10 @@ const Wrapper = styled.div`
 `;
 
 const BoardCard = ({ item }: { item: IBoard }) => {
-  const { setActiveBoardId } = useContext(BoardsContext);
-  const activeBoard = useActiveBoard();
+  const { activeBoard, setActiveBoard } = useActiveBoard();
   return (
     <Wrapper
-      onClick={() => setActiveBoardId(item.id)}
+      onClick={() => setActiveBoard(item.id)}
       className={activeBoard?.id === item.id ? "active" : ""}
     >
       <img

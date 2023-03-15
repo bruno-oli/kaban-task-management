@@ -3,6 +3,7 @@ import getRandomColor from "../functions/getRandomColor";
 
 export interface ITask {
   id: number;
+  name: string;
   description: string;
   status: IColumn;
 }
@@ -18,6 +19,7 @@ export interface IBoard {
   id: number;
   name: string;
   columns: IColumn[];
+  active: boolean;
 }
 
 interface IContext {
@@ -25,8 +27,6 @@ interface IContext {
   setColumns: (newState: IColumn[]) => void;
   boards: IBoard[];
   setBoards: (newState: IBoard[]) => void;
-  activeBoardId: number;
-  setActiveBoardId: (newState: number) => void;
 }
 
 export const INITIAL_BOARDS_VALUE: IContext = {
@@ -50,11 +50,10 @@ export const INITIAL_BOARDS_VALUE: IContext = {
       id: 1,
       name: "Welcome!",
       columns: [],
+      active: true,
     },
   ],
   setBoards: () => {},
-  activeBoardId: 1,
-  setActiveBoardId: () => {},
 };
 
 export const BoardsContext = createContext<IContext>(INITIAL_BOARDS_VALUE);
@@ -66,11 +65,6 @@ const BoardsProvider = ({ children }: { children: React.ReactNode }) => {
 
   // * Final Board
   const [boards, setBoards] = useState<IBoard[]>(INITIAL_BOARDS_VALUE.boards);
-
-  // * Active Board
-  const [activeBoardId, setActiveBoardId] = useState(
-    INITIAL_BOARDS_VALUE.activeBoardId
-  );
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -106,8 +100,6 @@ const BoardsProvider = ({ children }: { children: React.ReactNode }) => {
         setColumns,
         boards,
         setBoards,
-        activeBoardId,
-        setActiveBoardId,
       }}
     >
       {children}

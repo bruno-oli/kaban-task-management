@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { BoardsContext, IBoard } from "../contexts/BoardsContext";
 
 interface IProps {
   activeBoard: IBoard | undefined;
-  setActiveBoard: (newState: number) => void;
+  setActiveBoard: (id: number, obj: IBoard | undefined) => void;
 }
 
 const useActiveBoard = () => {
@@ -11,16 +11,22 @@ const useActiveBoard = () => {
   const activeBoard = boards.find((i) => {
     return i.active;
   });
-  const setActiveBoard = (id: number) => {
+  const setActiveBoard = (id: number, obj?: IBoard | undefined) => {
     const boardsClone = [...boards];
     boardsClone.forEach((i) => {
-      if (i.id === id) {
-        i.active = true;
+      if (obj === undefined) {
+        if (i.id === id) {
+          i.active = true;
+        } else {
+          i.active = false;
+        }
       } else {
-        i.active = false;
+        if (i.id === id) {
+          i = obj;
+        }
       }
     });
-    setBoards(boardsClone)
+    setBoards(boardsClone);
   };
   const values: IProps = {
     activeBoard,

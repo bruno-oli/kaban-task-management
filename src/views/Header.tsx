@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import styled, { ThemeContext } from "styled-components";
-import { darken, opacify, transparentize } from "polished";
 
 // * images
 import logoLight from "../assets/logoLight.svg";
@@ -8,7 +7,6 @@ import logoDark from "../assets/logoDark.svg";
 import { ThemeAppContext } from "../contexts/ThemeAppContext";
 import iconVerticalElipsis from "../assets/icon-vertical-ellipsis.svg";
 import Button from "../components/Button";
-import { BoardsContext } from "../contexts/BoardsContext";
 import useActiveBoard from "../hooks/useActiveBoard";
 
 const Wrapper = styled.header`
@@ -40,6 +38,7 @@ const Wrapper = styled.header`
       gap: 24px;
       align-items: center;
       img {
+        padding: 0 6px;
         cursor: pointer;
       }
     }
@@ -48,7 +47,8 @@ const Wrapper = styled.header`
 
 const Header = () => {
   const { isDarkTheme } = useContext(ThemeAppContext);
-  const activeBoard = useActiveBoard();
+  const { activeBoard } = useActiveBoard();
+  const refEdit = useRef<HTMLDialogElement>(null);
   return (
     <Wrapper>
       <div className="logo__container">
@@ -60,7 +60,11 @@ const Header = () => {
           <Button type="primary" size="large" width="164px">
             + Add New Task
           </Button>
-          <img src={iconVerticalElipsis} alt="" />
+          <img
+            src={iconVerticalElipsis}
+            alt=""
+            onClick={() => refEdit.current?.showModal()}
+          />
         </div>
       </div>
     </Wrapper>

@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import styled, { ThemeContext } from "styled-components";
 import Switch from "react-switch";
 
@@ -10,6 +10,8 @@ import { ThemeAppContext } from "../contexts/ThemeAppContext";
 import InputNewBoard from "../components/dialogs/InputNewBoard";
 import { BoardsContext } from "../contexts/BoardsContext";
 import BoardCard from "../components/BoardCard";
+import iconHideSidebar from "../assets/icon-hide-sidebar.svg";
+import { NavComportamentContext } from "../contexts/NavComportamentContext";
 
 const Wrapper = styled.nav`
   grid-area: navbar;
@@ -19,6 +21,7 @@ const Wrapper = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
   .boards {
     h2 {
       font-size: ${(props) => props.theme.fontSizes.headingS};
@@ -28,6 +31,7 @@ const Wrapper = styled.nav`
       letter-spacing: 2.4px;
     }
     .items {
+      width: 100%;
       display: flex;
       flex-direction: column;
     }
@@ -49,7 +53,7 @@ const Wrapper = styled.nav`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 24px;
     .theme {
       display: flex;
       align-items: center;
@@ -60,15 +64,27 @@ const Wrapper = styled.nav`
       background-color: ${(props) => props.theme.colors.bodyBackground};
       border-radius: 6px;
     }
+    .hide__sidebar {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 15px;
+      span {
+        font-weight: bold;
+        color: ${(props) => props.theme.colors.alternativeTextColor};
+        font-size: ${(props) => props.theme.fontSizes.headingM};
+      }
+    }
   }
 `;
 
 const NavBar = () => {
   const { isDarkTheme, setIsDarkTheme } = useContext(ThemeAppContext);
+  const { isHideen, setIsHideen } = useContext(NavComportamentContext);
   const { colors } = useContext(ThemeContext);
   const { boards } = useContext(BoardsContext);
   const refDialog = useRef<HTMLDialogElement>(null);
-
   return (
     <Wrapper>
       <InputNewBoard refProp={refDialog} />
@@ -97,6 +113,15 @@ const NavBar = () => {
             offColor={colors.primaryColor}
           />
           <img src={iconDarkTheme} alt="" />
+        </div>
+        <div
+          className="hide__sidebar"
+          onClick={() => {
+            setIsHideen(!isHideen);
+          }}
+        >
+          <img src={iconHideSidebar} alt="hide sidebar icon" />
+          <span>Hide Sidebar</span>
         </div>
       </div>
     </Wrapper>
