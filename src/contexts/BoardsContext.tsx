@@ -1,11 +1,17 @@
 import React, { createContext, useEffect, useState } from "react";
-import getRandomColor from "../functions/getRandomColor";
+
+interface ISubTask {
+  id: string;
+  name: string;
+  completed: boolean;
+}
 
 export interface ITask {
   id: string;
-  name: string;
+  title: string;
   description: string;
-  status: IColumn;
+  status: string;
+  subtasks: ISubTask[];
 }
 
 export interface IColumn {
