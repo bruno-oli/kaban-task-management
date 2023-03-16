@@ -30,9 +30,10 @@ const Wrapper = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
-    gap: 24px;
+    justify-content: space-between;
+    gap: 5%;
     .column {
-      width: 280px;
+      width: 20%;
       display: flex;
       flex-direction: column;
       align-items: flex-start;

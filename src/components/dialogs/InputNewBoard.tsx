@@ -130,7 +130,7 @@ const InputNewBoard = ({
       setColumns([
         ...columns,
         {
-          id: columns.length + 1,
+          id: crypto.randomUUID(),
           name: "",
           tasks: [],
           color: getRandomColor(),
@@ -139,7 +139,7 @@ const InputNewBoard = ({
     }
   }
 
-  function removeColumn(id: number) {
+  function removeColumn(id: string) {
     const columnsClone = [...columns];
     const removedColum = columnsClone.find((i) => {
       return i.id === id;
@@ -174,9 +174,10 @@ const InputNewBoard = ({
       setBoards([
         ...boards,
         {
-          id: boards.length + 1,
+          id: crypto.randomUUID(),
           name,
           columns,
+          active: false,
         },
       ]);
       setColumns(INITIAL_BOARDS_VALUE.columns);

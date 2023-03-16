@@ -2,21 +2,21 @@ import React, { createContext, useEffect, useState } from "react";
 import getRandomColor from "../functions/getRandomColor";
 
 export interface ITask {
-  id: number;
+  id: string;
   name: string;
   description: string;
   status: IColumn;
 }
 
 export interface IColumn {
-  id: number;
+  id: string;
   name: string;
   color: string;
   tasks: ITask[];
 }
 
 export interface IBoard {
-  id: number;
+  id: string;
   name: string;
   columns: IColumn[];
   active: boolean;
@@ -32,13 +32,13 @@ interface IContext {
 export const INITIAL_BOARDS_VALUE: IContext = {
   columns: [
     {
-      id: 1,
+      id: crypto.randomUUID(),
       name: "Todo",
       tasks: [],
       color: getRandomColor(),
     },
     {
-      id: 2,
+      id: crypto.randomUUID(),
       name: "Doing",
       tasks: [],
       color: getRandomColor(),
@@ -47,7 +47,7 @@ export const INITIAL_BOARDS_VALUE: IContext = {
   setColumns: () => {},
   boards: [
     {
-      id: 1,
+      id: crypto.randomUUID(),
       name: "Welcome!",
       columns: [],
       active: true,

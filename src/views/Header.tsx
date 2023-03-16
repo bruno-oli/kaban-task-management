@@ -8,6 +8,7 @@ import { ThemeAppContext } from "../contexts/ThemeAppContext";
 import iconVerticalElipsis from "../assets/icon-vertical-ellipsis.svg";
 import Button from "../components/Button";
 import useActiveBoard from "../hooks/useActiveBoard";
+import MoreOptions from "../components/MoreOptions";
 
 const Wrapper = styled.header`
   display: flex;
@@ -37,6 +38,7 @@ const Wrapper = styled.header`
       display: flex;
       gap: 24px;
       align-items: center;
+      position: relative;
       img {
         padding: 0 6px;
         cursor: pointer;
@@ -49,6 +51,7 @@ const Header = () => {
   const { isDarkTheme } = useContext(ThemeAppContext);
   const { activeBoard } = useActiveBoard();
   const refEdit = useRef<HTMLDialogElement>(null);
+  const refMoreOptions = useRef<HTMLDivElement>(null);
   return (
     <Wrapper>
       <div className="logo__container">
@@ -63,8 +66,9 @@ const Header = () => {
           <img
             src={iconVerticalElipsis}
             alt=""
-            onClick={() => refEdit.current?.showModal()}
+            onClick={() => refMoreOptions.current?.classList.toggle("active")}
           />
+          <MoreOptions refProp={refMoreOptions} />
         </div>
       </div>
     </Wrapper>

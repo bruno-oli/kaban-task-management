@@ -3,7 +3,7 @@ import { BoardsContext, IBoard } from "../contexts/BoardsContext";
 
 interface IProps {
   activeBoard: IBoard | undefined;
-  setActiveBoard: (id: number, obj: IBoard | undefined) => void;
+  setActiveBoard: (id: string) => void;
 }
 
 const useActiveBoard = () => {
@@ -11,19 +11,13 @@ const useActiveBoard = () => {
   const activeBoard = boards.find((i) => {
     return i.active;
   });
-  const setActiveBoard = (id: number, obj?: IBoard | undefined) => {
+  const setActiveBoard = (id: string) => {
     const boardsClone = [...boards];
     boardsClone.forEach((i) => {
-      if (obj === undefined) {
-        if (i.id === id) {
-          i.active = true;
-        } else {
-          i.active = false;
-        }
+      if (i.id === id) {
+        i.active = true;
       } else {
-        if (i.id === id) {
-          i = obj;
-        }
+        i.active = false;
       }
     });
     setBoards(boardsClone);
