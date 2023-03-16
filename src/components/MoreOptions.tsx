@@ -58,6 +58,7 @@ const MoreOptions = ({ refProp }: { refProp: RefObject<HTMLDivElement> }) => {
           return i.id !== activeBoard?.id;
         })
       );
+      refProp.current?.classList.toggle("active");
       toast.success("The board has been successfully removed!", {
         className: "notification__box",
       });
@@ -65,6 +66,7 @@ const MoreOptions = ({ refProp }: { refProp: RefObject<HTMLDivElement> }) => {
       toast.error("You need to have at least one board!", {
         className: "notification__box",
       });
+      refProp.current?.classList.toggle("active");
     }
   }
   return (

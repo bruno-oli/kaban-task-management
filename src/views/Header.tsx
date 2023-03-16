@@ -33,6 +33,9 @@ const Wrapper = styled.header`
     border-bottom: solid 1px ${(props) => props.theme.colors.borderColor};
     h1 {
       font-size: ${(props) => props.theme.fontSizes.headingX};
+      width: 80%;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     & > div {
       display: flex;

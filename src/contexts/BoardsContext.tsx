@@ -23,28 +23,11 @@ export interface IBoard {
 }
 
 interface IContext {
-  columns: IColumn[];
-  setColumns: (newState: IColumn[]) => void;
   boards: IBoard[];
   setBoards: (newState: IBoard[]) => void;
 }
 
-export const INITIAL_BOARDS_VALUE: IContext = {
-  columns: [
-    {
-      id: crypto.randomUUID(),
-      name: "Todo",
-      tasks: [],
-      color: getRandomColor(),
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Doing",
-      tasks: [],
-      color: getRandomColor(),
-    },
-  ],
-  setColumns: () => {},
+const INITIAL_BOARDS_VALUE: IContext = {
   boards: [
     {
       id: crypto.randomUUID(),
@@ -59,10 +42,6 @@ export const INITIAL_BOARDS_VALUE: IContext = {
 export const BoardsContext = createContext<IContext>(INITIAL_BOARDS_VALUE);
 
 const BoardsProvider = ({ children }: { children: React.ReactNode }) => {
-  const [columns, setColumns] = useState<IColumn[]>(
-    INITIAL_BOARDS_VALUE.columns
-  );
-
   // * Final Board
   const [boards, setBoards] = useState<IBoard[]>(INITIAL_BOARDS_VALUE.boards);
 
@@ -96,8 +75,6 @@ const BoardsProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <BoardsContext.Provider
       value={{
-        columns,
-        setColumns,
         boards,
         setBoards,
       }}

@@ -20,6 +20,10 @@ const Wrapper = styled.div`
     font-weight: bold;
     font-size: ${(props) => props.theme.fontSizes.headingM};
     color: ${(props) => props.theme.colors.alternativeTextColor};
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 15px;
   }
   &::before {
     content: "";

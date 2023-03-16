@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
+import AddNewColumnCard from "../components/AddNewColumnCard";
 import Button from "../components/Button";
 import ShowNavbarButton from "../components/ShowNavbarButton";
 import { NavComportamentContext } from "../contexts/NavComportamentContext";
@@ -87,6 +88,9 @@ const Content = () => {
               </div>
             );
           })}
+          {activeBoard?.columns.length && activeBoard.columns.length < 4 && (
+            <AddNewColumnCard />
+          )}
         </div>
       )}
     </Wrapper>

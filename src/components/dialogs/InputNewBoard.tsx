@@ -113,10 +113,25 @@ const InputNewBoard = ({
   refProp: RefObject<HTMLDialogElement>;
 }) => {
   // * Using Contex
-  const { boards, setBoards, setColumns, columns } = useContext(BoardsContext);
+  const { boards, setBoards } = useContext(BoardsContext);
 
   // * Board Infos
   const [name, setName] = useState("");
+
+  const [columns, setColumns] = useState([
+    {
+      id: crypto.randomUUID(),
+      name: "Todo",
+      tasks: [],
+      color: getRandomColor(),
+    },
+    {
+      id: crypto.randomUUID(),
+      name: "Doing",
+      tasks: [],
+      color: getRandomColor(),
+    },
+  ]);
 
   function addNewColumn() {
     if (columns.length >= 4) {
@@ -180,7 +195,20 @@ const InputNewBoard = ({
           active: false,
         },
       ]);
-      setColumns(INITIAL_BOARDS_VALUE.columns);
+      setColumns([
+        {
+          id: crypto.randomUUID(),
+          name: "Todo",
+          tasks: [],
+          color: getRandomColor(),
+        },
+        {
+          id: crypto.randomUUID(),
+          name: "Doing",
+          tasks: [],
+          color: getRandomColor(),
+        },
+      ]);
       setName("");
       refProp.current?.close();
       toast.success(`Board "${name}" was successfully created!`, {
