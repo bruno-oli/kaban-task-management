@@ -12,6 +12,7 @@ const lightTheme = {
     borderColor: "#E4EBFA",
     white: "#FFFFFF",
     secondaryButtonCollor: transparentize(0.9, "#635FC7"),
+    boxShadowColor: "#364e7e1a"
   },
   fontSizes: {
     headingX: "24px",

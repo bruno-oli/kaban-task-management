@@ -10,6 +10,7 @@ const darkTheme = {
     borderColor: "#3E3F4E",
     white: "#FFFFFF",
     secondaryButtonCollor: "#FFFFFF",
+    boxShadowColor: "#364e7e1a"
   },
   fontSizes: {
     headingX: "24px",

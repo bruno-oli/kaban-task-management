@@ -3,6 +3,7 @@ import styled from "styled-components";
 import AddNewColumnCard from "../components/AddNewColumnCard";
 import Button from "../components/Button";
 import ShowNavbarButton from "../components/ShowNavbarButton";
+import TaskCard from "../components/TaskCard";
 import { NavComportamentContext } from "../contexts/NavComportamentContext";
 import useActiveBoard from "../hooks/useActiveBoard";
 
@@ -49,6 +50,12 @@ const Wrapper = styled.div`
           border-radius: 100%;
         }
       }
+      .items {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
     }
   }
 `;
@@ -60,7 +67,7 @@ const Content = () => {
     <Wrapper>
       {isHideen && <ShowNavbarButton />}
       {activeBoard?.columns.length === 0 ? (
-        <div className="no__results ">
+        <div className="no__results">
           <div>
             <span>
               This board is empty. Create a new column to get started.
@@ -84,7 +91,11 @@ const Content = () => {
                     {i.name} ({i.tasks.length})
                   </span>
                 </div>
-                <div className="items">{}</div>
+                <div className="items">
+                  {i.tasks.map((task) => {
+                    return <TaskCard item={task} />;
+                  })}
+                </div>
               </div>
             );
           })}

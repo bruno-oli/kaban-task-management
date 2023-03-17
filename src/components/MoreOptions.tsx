@@ -20,6 +20,7 @@ const Wrapper = styled.div`
   visibility: hidden;
   opacity: 0;
   transition: 0.2s ease-out;
+  box-shadow: 0px 4px 6px ${(props) => props.theme.colors.boxShadowColor};
   &.active {
     visibility: visible;
     opacity: 1;

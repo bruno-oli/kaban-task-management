@@ -13,6 +13,7 @@ declare module "styled-components" {
       borderColor: string;
       white: string;
       secondaryButtonCollor: string;
+      boxShadowColor: string;
     };
     fontSizes: {
       headingX: string;
