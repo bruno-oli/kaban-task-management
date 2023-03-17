@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
 
 const Wrapper = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   border: none;
   outline: none;
