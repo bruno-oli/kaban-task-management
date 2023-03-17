@@ -43,8 +43,6 @@ const Wrapper = styled.div`
 `;
 
 const MoreOptions = ({ refProp }: { refProp: RefObject<HTMLDivElement> }) => {
-  const { boards, setBoards } = useContext(BoardsContext);
-  const { activeBoard, setActiveBoard } = useActiveBoard();
   const refDialogDelete = useRef<HTMLDialogElement>(null);
   return (
     <Wrapper ref={refProp}>
@@ -52,7 +50,10 @@ const MoreOptions = ({ refProp }: { refProp: RefObject<HTMLDivElement> }) => {
       <button>Edit Board</button>
       <button
         className="delete"
-        onClick={() => refDialogDelete.current?.showModal()}
+        onClick={() => {
+          refDialogDelete.current?.showModal();
+          refProp.current?.classList.toggle("active");
+        }}
       >
         Delete Board
       </button>
