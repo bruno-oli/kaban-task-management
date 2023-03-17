@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 
-interface ISubTask {
+export interface ISubTask {
   id: string;
   name: string;
   completed: boolean;
@@ -10,7 +10,6 @@ export interface ITask {
   id: string;
   title: string;
   description: string;
-  status: string;
   subtasks: ISubTask[];
 }
 
@@ -39,7 +38,7 @@ const INITIAL_BOARDS_VALUE: IContext = {
       id: crypto.randomUUID(),
       name: "Welcome!",
       columns: [],
-      active: true,
+      active: false,
     },
   ],
   setBoards: () => {},

@@ -3,36 +3,19 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 
 import iconCross from "../../assets/icon-cross.svg";
-import {
-  BoardsContext,
-  INITIAL_BOARDS_VALUE,
-} from "../../contexts/BoardsContext";
+import { BoardsContext } from "../../contexts/BoardsContext";
 import getRandomColor from "../../functions/getRandomColor";
+import BaseDialogStyle from "../../styles/base/BaseDialogStyle";
 import Button from "../Button";
 
-const Wrapper = styled.dialog`
+const Wrapper = styled(BaseDialogStyle)`
   width: 480px;
   min-height: 429px;
-  border-radius: 6px;
-  background-color: ${(props) => props.theme.colors.elementBackground};
-  border: none;
-  top: calc((100% - 429px) / 2);
-  left: calc((100% - 480px) / 2);
-  z-index: 2;
-  padding: 32px;
-  &::backdrop {
-    opacity: 1;
-  }
-  .content {
+  .contentDialog {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    h1 {
-      font-size: ${(props) => props.theme.fontSizes.headingL};
-      font-weight: bold;
-      margin-bottom: 24px;
-    }
     form {
       display: flex;
       flex-direction: column;
@@ -41,25 +24,6 @@ const Wrapper = styled.dialog`
       .board__name {
         width: 100%;
         margin-bottom: 24px;
-        label {
-          font-size: ${(props) => props.theme.fontSizes.headingS};
-          display: block;
-          font-weight: bold;
-          margin-bottom: 8px;
-        }
-        input {
-          width: 100%;
-          height: 40px;
-          outline: none;
-          border: solid 1px ${(props) => props.theme.colors.borderColor};
-          border-radius: 4px;
-          background: none;
-          padding-left: 16px;
-          &::placeholder {
-            opacity: 0.25;
-            font-weight: bold;
-          }
-        }
       }
       .board__columns {
         width: 100%;
@@ -84,7 +48,6 @@ const Wrapper = styled.dialog`
               border-radius: 4px;
               display: flex;
               align-items: center;
-              padding: 0 16px;
               input {
                 width: 100%;
                 font-size: ${(props) => props.theme.fontSizes.bodyL};
@@ -219,7 +182,7 @@ const InputNewBoard = ({
 
   return (
     <Wrapper ref={refProp}>
-      <div className="content">
+      <div className="contentDialog">
         <h1>Add New Board</h1>
         <form>
           <div className="board__name">

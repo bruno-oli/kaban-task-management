@@ -9,7 +9,9 @@ interface IProps {
 const useActiveBoard = () => {
   const { boards, setBoards } = useContext(BoardsContext);
   const activeBoard = boards.find((i) => {
-    return i.active;
+    if (i !== undefined) {
+      return i.active;
+    }
   });
   const setActiveBoard = (id: string) => {
     const boardsClone = [...boards];
