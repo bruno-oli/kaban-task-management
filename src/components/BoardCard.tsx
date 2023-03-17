@@ -24,6 +24,7 @@ const Wrapper = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     padding-right: 15px;
+    text-transform: capitalize;
   }
   &::before {
     content: "";
