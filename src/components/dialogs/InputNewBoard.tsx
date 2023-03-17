@@ -136,7 +136,20 @@ const InputNewBoard = ({
   }
 
   function addNewBoard() {
-    if (name.length < 4) {
+    function getColumnNameLength() {
+      let error = false;
+      columns.forEach((i) => {
+        if (i.name.length < 4) {
+          error = true;
+        }
+      });
+      return error;
+    }
+    if (getColumnNameLength()) {
+      toast.error("The columns name must be at least four characters long!", {
+        className: "notification__box",
+      });
+    } else if (name.length < 4) {
       toast.error("The board name must be at least four characters long!", {
         className: "notification__box",
       });
