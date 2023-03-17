@@ -1,8 +1,9 @@
-import React, { RefObject, useContext } from "react";
+import React, { RefObject, useContext, useRef } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import { BoardsContext } from "../contexts/BoardsContext";
 import useActiveBoard from "../hooks/useActiveBoard";
+import DeleteBoard from "./dialogs/DeleteBoard";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -44,36 +45,15 @@ const Wrapper = styled.div`
 const MoreOptions = ({ refProp }: { refProp: RefObject<HTMLDivElement> }) => {
   const { boards, setBoards } = useContext(BoardsContext);
   const { activeBoard, setActiveBoard } = useActiveBoard();
-  function removeBoard() {
-    if (boards.length > 1) {
-      const index = boards.findIndex((i) => {
-        return i.id === activeBoard?.id;
-      });
-      if (index === 0) {
-        setActiveBoard(boards[index + 1].id);
-      } else {
-        setActiveBoard(boards[0].id);
-      }
-      setBoards(
-        boards.filter((i) => {
-          return i.id !== activeBoard?.id;
-        })
-      );
-      refProp.current?.classList.toggle("active");
-      toast.success("The board has been successfully removed!", {
-        className: "notification__box",
-      });
-    } else {
-      toast.error("You need to have at least one board!", {
-        className: "notification__box",
-      });
-      refProp.current?.classList.toggle("active");
-    }
-  }
+  const refDialogDelete = useRef<HTMLDialogElement>(null);
   return (
     <Wrapper ref={refProp}>
+      <DeleteBoard refDialogDelete={refDialogDelete} />
       <button>Edit Board</button>
-      <button className="delete" onClick={removeBoard}>
+      <button
+        className="delete"
+        onClick={() => refDialogDelete.current?.showModal()}
+      >
         Delete Board
       </button>
     </Wrapper>
