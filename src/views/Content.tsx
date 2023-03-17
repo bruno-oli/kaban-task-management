@@ -93,7 +93,7 @@ const Content = () => {
                 </div>
                 <div className="items">
                   {i.tasks.map((task) => {
-                    return <TaskCard item={task} />;
+                    return <TaskCard key={task.id} item={task} />;
                   })}
                 </div>
               </div>
