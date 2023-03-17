@@ -166,7 +166,7 @@ const InputNewBoard = ({
         ...boards,
         {
           id: crypto.randomUUID(),
-          name: name[0].toUpperCase(),
+          name: name,
           columns,
           active: false,
         },

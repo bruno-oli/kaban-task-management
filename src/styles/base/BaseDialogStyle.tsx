@@ -29,6 +29,7 @@ const BaseDialogStyle = styled.dialog`
     font-size: ${(props) => props.theme.fontSizes.headingL};
     font-weight: bold;
     margin-bottom: 24px;
+    text-transform: capitalize;
   }
   label {
     font-size: ${(props) => props.theme.fontSizes.headingS};
