@@ -26,6 +26,17 @@ const Wrapper = styled.div`
     font-size: ${(props) => props.theme.fontSizes.bodyM};
     font-weight: bold;
   }
+  @keyframes animEnter {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: initial;
+    }
+  }
+  animation: animEnter 0.3s forwards ease-out;
 `;
 
 const TaskCard = ({ item }: { item: ITask }) => {
