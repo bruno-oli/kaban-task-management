@@ -71,7 +71,7 @@ const DeleteBoard = ({
       <div className="contentDialog">
         <h1>Delete this board?</h1>
         <p>
-          Are you sure you want to delete the ‘Platform Launch’ board? This
+          Are you sure you want to delete the "{activeBoard?.name}" board? This
           action will remove all columns and tasks and cannot be reversed.
         </p>
         <div className="options">

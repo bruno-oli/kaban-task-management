@@ -47,6 +47,7 @@ const EditBoard = ({
   const { boards, setBoards } = useContext(BoardsContext);
   const { activeBoard } = useActiveBoard();
   const [name, setName] = useState<string | undefined>(activeBoard?.name);
+  
   const [columns, setColumns] = useState<IColumn[] | undefined>(
     _.cloneDeep(activeBoard?.columns)
   );
