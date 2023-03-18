@@ -11,6 +11,8 @@ import useActiveBoard from "../hooks/useActiveBoard";
 import MoreOptions from "../components/MoreOptions";
 import InputNewTask from "../components/dialogs/InputNewTask";
 import { toast } from "react-toastify";
+import EditBoard from "../components/dialogs/EditBoard";
+import EditBoardProvider from "../contexts/EditBoardContext";
 
 const Wrapper = styled.header`
   display: flex;
@@ -57,43 +59,49 @@ const Header = () => {
   const { activeBoard } = useActiveBoard();
   const refMoreOptions = useRef<HTMLDivElement>(null);
   const refAddNewTask = useRef<HTMLDialogElement>(null);
+
   return (
-    <Wrapper>
-      <InputNewTask refProp={refAddNewTask} />
-      <div className="logo__container">
-        <img src={isDarkTheme ? logoLight : logoDark} alt="logo" />
-      </div>
-      <div className="content">
-        <h1>{activeBoard?.name}</h1>
-        <div>
-          <Button
-            type="primary"
-            size="large"
-            width="164px"
-            onClick={() => {
-              if (
-                activeBoard?.columns.length &&
-                activeBoard?.columns.length > 0
-              ) {
-                refAddNewTask.current?.showModal();
-              } else {
-                toast.error("You need to have at least one column to add a task!", {
-                  className: "notification__box",
-                });
-              }
-            }}
-          >
-            + Add New Task
-          </Button>
-          <img
-            src={iconVerticalElipsis}
-            alt=""
-            onClick={() => refMoreOptions.current?.classList.toggle("active")}
-          />
-          <MoreOptions refProp={refMoreOptions} />
+    <EditBoardProvider>
+      <Wrapper>
+        <InputNewTask refProp={refAddNewTask} />
+        <div className="logo__container">
+          <img src={isDarkTheme ? logoLight : logoDark} alt="logo" />
         </div>
-      </div>
-    </Wrapper>
+        <div className="content">
+          <h1>{activeBoard?.name}</h1>
+          <div>
+            <Button
+              type="primary"
+              size="large"
+              width="164px"
+              onClick={() => {
+                if (
+                  activeBoard?.columns.length &&
+                  activeBoard?.columns.length > 0
+                ) {
+                  refAddNewTask.current?.showModal();
+                } else {
+                  toast.error(
+                    "You need to have at least one column to add a task!",
+                    {
+                      className: "notification__box",
+                    }
+                  );
+                }
+              }}
+            >
+              + Add New Task
+            </Button>
+            <img
+              src={iconVerticalElipsis}
+              alt=""
+              onClick={() => refMoreOptions.current?.classList.toggle("active")}
+            />
+            <MoreOptions refProp={refMoreOptions} />
+          </div>
+        </div>
+      </Wrapper>
+    </EditBoardProvider>
   );
 };
 

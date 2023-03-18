@@ -2,8 +2,10 @@ import React, { RefObject, useContext, useRef } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import { BoardsContext } from "../contexts/BoardsContext";
+import { EditBoardContext } from "../contexts/EditBoardContext";
 import useActiveBoard from "../hooks/useActiveBoard";
 import DeleteBoard from "./dialogs/DeleteBoard";
+import EditBoard from "./dialogs/EditBoard";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -44,10 +46,21 @@ const Wrapper = styled.div`
 
 const MoreOptions = ({ refProp }: { refProp: RefObject<HTMLDivElement> }) => {
   const refDialogDelete = useRef<HTMLDialogElement>(null);
+
+  const { isOpen, setIsOpen, refEditBoard } = useContext(EditBoardContext);
   return (
     <Wrapper ref={refProp}>
       <DeleteBoard refDialogDelete={refDialogDelete} />
-      <button>Edit Board</button>
+      {isOpen && <EditBoard refProp={refEditBoard} />}
+
+      <button
+        onClick={() => {
+          refProp.current?.classList.toggle("active");
+          setIsOpen(true);
+        }}
+      >
+        Edit Board
+      </button>
       <button
         className="delete"
         onClick={() => {
