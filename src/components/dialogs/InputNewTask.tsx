@@ -188,6 +188,7 @@ const InputNewTask = ({
           title,
           description,
           subtasks: subTasks,
+          column: boardsClone[boardIndex].columns[columnIndex].id,
         },
       ];
       setBoards(boardsClone);

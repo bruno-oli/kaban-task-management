@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import styled from "styled-components";
 import AddNewColumnCard from "../components/AddNewColumnCard";
 import Button from "../components/Button";
+import ViewTask from "../components/dialogs/ViewTask";
 import ShowNavbarButton from "../components/ShowNavbarButton";
 import TaskCard from "../components/TaskCard";
 import { NavComportamentContext } from "../contexts/NavComportamentContext";
+import ViewTaskProvider from "../contexts/ViewTaskContext";
 import useActiveBoard from "../hooks/useActiveBoard";
 
 const Wrapper = styled.div`
@@ -63,47 +65,54 @@ const Wrapper = styled.div`
 const Content = () => {
   const { activeBoard } = useActiveBoard();
   const { isHideen } = useContext(NavComportamentContext);
+
+  const refViewTask = useRef<HTMLDialogElement>(null);
   return (
     <Wrapper>
-      {isHideen && <ShowNavbarButton />}
-      {activeBoard?.columns.length === 0 ? (
-        <div className="no__results">
-          <div>
-            <span>
-              This board is empty. Create a new column to get started.
-            </span>
-            <Button type="primary" size="large" width="174px">
-              + Add New Column
-            </Button>
+      <ViewTaskProvider>
+        <ViewTask refProp={refViewTask} />
+        {isHideen && <ShowNavbarButton />}
+        {activeBoard?.columns.length === 0 ? (
+          <div className="no__results">
+            <div>
+              <span>
+                This board is empty. Create a new column to get started.
+              </span>
+              <Button type="primary" size="large" width="174px">
+                + Add New Column
+              </Button>
+            </div>
           </div>
-        </div>
-      ) : (
-        <div className="coloumns">
-          {activeBoard?.columns.map((i) => {
-            return (
-              <div className="column" key={i.id}>
-                <div className="column__details">
-                  <div
-                    className="column__color"
-                    style={{ backgroundColor: `${i.color}` }}
-                  ></div>
-                  <span>
-                    {i.name} ({i.tasks.length})
-                  </span>
+        ) : (
+          <div className="coloumns">
+            {activeBoard?.columns.map((i) => {
+              return (
+                <div className="column" key={i.id}>
+                  <div className="column__details">
+                    <div
+                      className="column__color"
+                      style={{ backgroundColor: `${i.color}` }}
+                    ></div>
+                    <span>
+                      {i.name} ({i.tasks.length})
+                    </span>
+                  </div>
+                  <div className="items">
+                    {i.tasks.map((task) => {
+                      return (
+                        <TaskCard refProp={refViewTask} key={task.id} item={task} />
+                      );
+                    })}
+                  </div>
                 </div>
-                <div className="items">
-                  {i.tasks.map((task) => {
-                    return <TaskCard key={task.id} item={task} />;
-                  })}
-                </div>
-              </div>
-            );
-          })}
-          {activeBoard?.columns.length && activeBoard.columns.length < 4 && (
-            <AddNewColumnCard />
-          )}
-        </div>
-      )}
+              );
+            })}
+            {activeBoard?.columns.length && activeBoard.columns.length < 4 && (
+              <AddNewColumnCard />
+            )}
+          </div>
+        )}
+      </ViewTaskProvider>
     </Wrapper>
   );
 };

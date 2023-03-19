@@ -11,6 +11,7 @@ export interface ITask {
   title: string;
   description: string;
   subtasks: ISubTask[];
+  column: string;
 }
 
 export interface IColumn {

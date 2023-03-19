@@ -1,6 +1,7 @@
-import React from "react";
+import React, { RefObject, useContext, useRef } from "react";
 import styled from "styled-components";
 import { ITask } from "../contexts/BoardsContext";
+import { ViewTaskContext } from "../contexts/ViewTaskContext";
 
 const Wrapper = styled.div`
   cursor: pointer;
@@ -39,7 +40,13 @@ const Wrapper = styled.div`
   animation: animEnter 0.3s forwards ease-out;
 `;
 
-const TaskCard = ({ item }: { item: ITask }) => {
+const TaskCard = ({
+  item,
+  refProp,
+}: {
+  item: ITask;
+  refProp: RefObject<HTMLDialogElement>;
+}) => {
   function getCompletedTasksNumber() {
     let count = 0;
     item.subtasks.forEach((i) => {
@@ -49,8 +56,16 @@ const TaskCard = ({ item }: { item: ITask }) => {
     });
     return count;
   }
+
+  const { setActiveTask } = useContext(ViewTaskContext);
+
   return (
-    <Wrapper>
+    <Wrapper
+      onClick={() => {
+        setActiveTask(item);
+        refProp.current?.showModal();
+      }}
+    >
       <h2>{item.title}</h2>
       {item.subtasks.length > 0 && (
         <span>
