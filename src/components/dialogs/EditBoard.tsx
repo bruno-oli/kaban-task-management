@@ -47,7 +47,7 @@ const EditBoard = ({
   const { boards, setBoards } = useContext(BoardsContext);
   const { activeBoard } = useActiveBoard();
   const [name, setName] = useState<string | undefined>(activeBoard?.name);
-  
+
   const [columns, setColumns] = useState<IColumn[] | undefined>(
     _.cloneDeep(activeBoard?.columns)
   );
@@ -93,7 +93,7 @@ const EditBoard = ({
         });
       } else if (
         boards.find((i) => {
-          return i.name === name;
+          return i.name === name && i.id !== activeBoard.id;
         })
       ) {
         toast.error("This name is already being used!", {
