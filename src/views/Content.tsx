@@ -11,7 +11,21 @@ import useActiveBoard from "../hooks/useActiveBoard";
 
 const Wrapper = styled.div`
   grid-area: content;
+  max-height: 100%;
   padding: 24px;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: ${(props) => props.theme.colors.elementBackground};
+    backdrop-filter: blur(20px);
+    border-radius: 0 6px 6px 0;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${(props) => props.theme.colors.primaryColor};
+    border-radius: 6px;
+  }
   .no__results {
     display: flex;
     align-items: center;
@@ -100,7 +114,11 @@ const Content = () => {
                   <div className="items">
                     {i.tasks.map((task) => {
                       return (
-                        <TaskCard refProp={refViewTask} key={task.id} item={task} />
+                        <TaskCard
+                          refProp={refViewTask}
+                          key={task.id}
+                          item={task}
+                        />
                       );
                     })}
                   </div>
