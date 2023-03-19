@@ -139,14 +139,14 @@ const InputNewBoard = ({
     function getColumnNameLength() {
       let error = false;
       columns.forEach((i) => {
-        if (i.name.length < 4) {
+        if (i.name.length < 4 || i.name.length > 20) {
           error = true;
         }
       });
       return error;
     }
     if (getColumnNameLength()) {
-      toast.error("The columns name must be at least four characters long!", {
+      toast.error("Column names must be between four and 20 letters long!", {
         className: "notification__box",
       });
     } else if (name.length < 4) {

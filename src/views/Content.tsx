@@ -107,7 +107,7 @@ const Content = () => {
                       className="column__color"
                       style={{ backgroundColor: `${i.color}` }}
                     ></div>
-                    <span>
+                    <span className="column__name">
                       {i.name} ({i.tasks.length})
                     </span>
                   </div>
