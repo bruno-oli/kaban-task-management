@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0px 4px 6px ${(props) => props.theme.colors.boxShadowColor};
   span {
     font-size: ${(props) => props.theme.fontSizes.headingX};
     color: ${(props) => props.theme.colors.alternativeTextColor};
