@@ -8,17 +8,16 @@ const BaseDialogStyle = styled.dialog`
   border-radius: 6px;
   z-index: 2;
   padding: 32px;
-  z-index: 2;
   &::-webkit-scrollbar {
     width: 8px;
   }
   &::-webkit-scrollbar-track {
-    background: ${props => props.theme.colors.elementBackground};
+    background: ${(props) => props.theme.colors.elementBackground};
     backdrop-filter: blur(20px);
     border-radius: 0 6px 6px 0;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: ${props => props.theme.colors.primaryColor};
+    background-color: ${(props) => props.theme.colors.primaryColor};
     border-radius: 6px;
   }
   &::backdrop {
@@ -30,6 +29,7 @@ const BaseDialogStyle = styled.dialog`
     font-weight: bold;
     margin-bottom: 24px;
     text-transform: capitalize;
+    font-weight: 700;
   }
   label {
     font-size: ${(props) => props.theme.fontSizes.headingS};
