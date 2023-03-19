@@ -1,4 +1,4 @@
-import { RefObject, useContext } from "react";
+import { RefObject, useContext, useRef } from "react";
 import styled from "styled-components";
 import { ViewTaskContext } from "../../contexts/ViewTaskContext";
 import BaseDialogStyle from "../../styles/base/BaseDialogStyle";
@@ -7,7 +7,7 @@ import useActiveBoard from "../../hooks/useActiveBoard";
 
 import _ from "lodash";
 import { BoardsContext } from "../../contexts/BoardsContext";
-import { transparentize } from "polished";
+import { toast } from "react-toastify";
 
 const Wrapper = styled(BaseDialogStyle)`
   width: 480px;
@@ -17,6 +17,7 @@ const Wrapper = styled(BaseDialogStyle)`
       align-items: center;
       justify-content: space-between;
       margin-bottom: 24px;
+      position: relative;
       h1 {
         width: 100%;
         overflow: hidden;
@@ -26,6 +27,40 @@ const Wrapper = styled(BaseDialogStyle)`
       img {
         cursor: pointer;
         padding: 0 5px;
+      }
+      .menu {
+        width: 192px;
+        height: 94px;
+        border-radius: 8px;
+        position: absolute;
+        background-color: ${(props) => props.theme.colors.bodyBackground};
+        box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);
+        right: 0px;
+        bottom: -120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 16px;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s;
+        &.active {
+          visibility: visible;
+          opacity: 1;
+        }
+        button {
+          cursor: pointer;
+          background: none;
+          outline: none;
+          border: none;
+          font-size: ${(props) => props.theme.fontSizes.bodyL};
+          height: 50%;
+          text-align: left;
+          color: ${(props) => props.theme.colors.alternativeTextColor};
+          &:last-child {
+            color: ${(props) => props.theme.colors.deleteColor};
+          }
+        }
       }
     }
     p {
@@ -76,16 +111,12 @@ const Wrapper = styled(BaseDialogStyle)`
     select {
       outline: none;
       border: solid 1px ${(props) => props.theme.colors.borderColor};
-      background: none;
+      background: ${(props) => props.theme.colors.elementBackground};
       color: ${(props) => props.theme.colors.textColor};
       width: 100%;
       height: 40px;
       border-radius: 4px;
       padding: 0 16px;
-      &:hover {
-        background-color: ${(props) =>
-          transparentize(0.8, props.theme.colors.primaryColor)};
-      }
     }
   }
 `;
@@ -94,6 +125,29 @@ const ViewTask = ({ refProp }: { refProp: RefObject<HTMLDialogElement> }) => {
   const { activeTask, setActiveTask } = useContext(ViewTaskContext);
   const { activeBoard } = useActiveBoard();
   const { boards, setBoards } = useContext(BoardsContext);
+
+  const refMenu = useRef<HTMLDivElement>(null);
+
+  function deleteTask() {
+    const boardIndex = boards.findIndex((i) => {
+      return i.id === activeBoard?.id;
+    });
+    const columnIndex = boards[boardIndex].columns.findIndex((i) => {
+      return i.id === activeTask.column;
+    });
+    const cloneBoards = _.cloneDeep(boards);
+    cloneBoards[boardIndex].columns[columnIndex].tasks = cloneBoards[
+      boardIndex
+    ].columns[columnIndex].tasks.filter((i) => {
+      return i.id !== activeTask.id;
+    });
+    setBoards(cloneBoards);
+    refProp.current?.close();
+    refMenu.current?.classList.toggle("active");
+    toast.success("The task has been removed successfully!", {
+      className: "notification__box",
+    });
+  }
 
   function getCompletedTasks() {
     let completed = 0;
@@ -110,7 +164,15 @@ const ViewTask = ({ refProp }: { refProp: RefObject<HTMLDialogElement> }) => {
       <div className="contentDialog">
         <div className="header">
           <h1>{activeTask.title}</h1>
-          <img src={iconVerticalEllipsis} alt="more options" />
+          <img
+            src={iconVerticalEllipsis}
+            alt="more options"
+            onClick={() => refMenu.current?.classList.toggle("active")}
+          />
+          <div className="menu" ref={refMenu}>
+            <button>Edit Task</button>
+            <button onClick={deleteTask}>Delete Task</button>
+          </div>
         </div>
         <p>{activeTask.description}</p>
         <label>

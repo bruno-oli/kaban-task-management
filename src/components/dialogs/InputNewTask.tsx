@@ -68,15 +68,9 @@ const Wrapper = styled(BaseDialogStyle)`
         border: solid 1px ${(props) => props.theme.colors.borderColor};
         padding: 0 16px;
         border-radius: 4px;
-        background: transparent;
+        background: ${(props) => props.theme.colors.elementBackground};
         color: ${(props) => props.theme.colors.textColor};
         font-size: ${(props) => props.theme.fontSizes.bodyL};
-
-        &:hover {
-          border-color: ${(props) => props.theme.colors.primaryColor};
-          background-color: ${(props) =>
-            transparentize(0.2, props.theme.colors.primaryColor)};
-        }
         option {
           color: ${(props) => props.theme.colors.textColor};
           font-size: ${(props) => props.theme.fontSizes.bodyL};
@@ -182,7 +176,6 @@ const InputNewTask = ({
         return i.id === status;
       });
       boardsClone[boardIndex].columns[columnIndex].tasks = [
-        ...boardsClone[boardIndex].columns[columnIndex].tasks,
         {
           id: crypto.randomUUID(),
           title,
@@ -190,6 +183,7 @@ const InputNewTask = ({
           subtasks: subTasks,
           column: boardsClone[boardIndex].columns[columnIndex].id,
         },
+        ...boardsClone[boardIndex].columns[columnIndex].tasks,
       ];
       setBoards(boardsClone);
       toast.success(`The task: "${title}" was adds success to the column.`, {
