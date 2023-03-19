@@ -7,6 +7,7 @@ import useActiveBoard from "../../hooks/useActiveBoard";
 
 import _ from "lodash";
 import { BoardsContext } from "../../contexts/BoardsContext";
+import { transparentize } from "polished";
 
 const Wrapper = styled(BaseDialogStyle)`
   width: 480px;
@@ -81,6 +82,10 @@ const Wrapper = styled(BaseDialogStyle)`
       height: 40px;
       border-radius: 4px;
       padding: 0 16px;
+      &:hover {
+        background-color: ${(props) =>
+          transparentize(0.8, props.theme.colors.primaryColor)};
+      }
     }
   }
 `;
