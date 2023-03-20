@@ -190,6 +190,16 @@ const InputNewTask = ({
         className: "notification__box",
       });
       refProp.current?.close();
+      setStatus("unselected");
+      setTitle("");
+      setDescription("");
+      setSubTasks([
+        {
+          id: crypto.randomUUID(),
+          name: "Example",
+          completed: false,
+        },
+      ]);
     }
   }
 
