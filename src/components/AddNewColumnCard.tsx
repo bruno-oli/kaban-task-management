@@ -17,6 +17,13 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   box-shadow: 0px 4px 6px ${(props) => props.theme.colors.boxShadowColor};
+  transition: transform 0.3s ease-out;
+  &:hover {
+    transform: scale(105%);
+    span {
+      color: ${(props) => props.theme.colors.primaryColor};
+    }
+  }
   span {
     font-size: ${(props) => props.theme.fontSizes.headingX};
     color: ${(props) => props.theme.colors.alternativeTextColor};
