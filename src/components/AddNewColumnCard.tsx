@@ -1,6 +1,11 @@
 import { transparentize } from "polished";
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import _ from "lodash";
+import { BoardsContext } from "../contexts/BoardsContext";
+import useActiveBoard from "../hooks/useActiveBoard";
+import getRandomColor from "../functions/getRandomColor";
+import { toast } from "react-toastify";
 
 const Wrapper = styled.div`
   cursor: pointer;
@@ -20,8 +25,26 @@ const Wrapper = styled.div`
 `;
 
 const AddNewColumnCard = () => {
+  const { boards, setBoards } = useContext(BoardsContext);
+  const { activeBoard } = useActiveBoard();
+  function addNewColumn() {
+    const cloneBoards = _.cloneDeep(boards);
+    const boardIndex = boards.findIndex((i) => {
+      return i.id === activeBoard?.id;
+    });
+    cloneBoards[boardIndex].columns.push({
+      id: crypto.randomUUID(),
+      name: "New Column",
+      tasks: [],
+      color: getRandomColor(),
+    });
+    setBoards(cloneBoards);
+    toast.success("Column created successfully!", {
+      className: "notification__box",
+    });
+  }
   return (
-    <Wrapper>
+    <Wrapper onClick={addNewColumn}>
       <span>+ New Column</span>
     </Wrapper>
   );

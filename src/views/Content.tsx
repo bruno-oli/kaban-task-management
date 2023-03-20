@@ -8,6 +8,10 @@ import TaskCard from "../components/TaskCard";
 import { NavComportamentContext } from "../contexts/NavComportamentContext";
 import ViewTaskProvider from "../contexts/ViewTaskContext";
 import useActiveBoard from "../hooks/useActiveBoard";
+import _ from "lodash";
+import getRandomColor from "../functions/getRandomColor";
+import { BoardsContext } from "../contexts/BoardsContext";
+import { toast } from "react-toastify";
 
 const Wrapper = styled.div`
   grid-area: content;
@@ -79,8 +83,24 @@ const Wrapper = styled.div`
 const Content = () => {
   const { activeBoard } = useActiveBoard();
   const { isHideen } = useContext(NavComportamentContext);
-
   const refViewTask = useRef<HTMLDialogElement>(null);
+  const { boards, setBoards } = useContext(BoardsContext);
+  function addNewColumn() {
+    const cloneBoards = _.cloneDeep(boards);
+    const boardIndex = boards.findIndex((i) => {
+      return i.id === activeBoard?.id;
+    });
+    cloneBoards[boardIndex].columns.push({
+      id: crypto.randomUUID(),
+      name: "New Column",
+      tasks: [],
+      color: getRandomColor(),
+    });
+    setBoards(cloneBoards);
+    toast.success("Column created successfully!", {
+      className: "notification__box",
+    });
+  }
   return (
     <Wrapper>
       <ViewTaskProvider>
@@ -92,7 +112,12 @@ const Content = () => {
               <span>
                 This board is empty. Create a new column to get started.
               </span>
-              <Button type="primary" size="large" width="174px">
+              <Button
+                type="primary"
+                size="large"
+                width="174px"
+                onClick={addNewColumn}
+              >
                 + Add New Column
               </Button>
             </div>
