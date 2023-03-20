@@ -22,25 +22,6 @@ const Wrapper = styled(BaseDialogStyle)`
     }
     .descriptionBox {
       width: 100%;
-      textarea {
-        width: 100%;
-        height: 112px;
-        outline: none;
-        border: solid 1px ${(props) => props.theme.colors.borderColor};
-        border-radius: 4px;
-        background: none;
-        padding: 16px;
-        resize: none;
-        margin-bottom: 24px;
-        color: ${(props) => props.theme.colors.textColor};
-        &:focus {
-          border-color: ${(props) => props.theme.colors.primaryColor};
-        }
-        &::placeholder {
-          opacity: 0.25;
-          font-weight: bold;
-        }
-      }
     }
     .subtasks {
       margin-bottom: 24px;

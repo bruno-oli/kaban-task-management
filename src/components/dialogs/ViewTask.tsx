@@ -30,13 +30,12 @@ const Wrapper = styled(BaseDialogStyle)`
       }
       .menu {
         width: 192px;
-        height: 94px;
         border-radius: 8px;
         position: absolute;
         background-color: ${(props) => props.theme.colors.bodyBackground};
         box-shadow: 0px 10px 20px rgba(54, 78, 126, 0.25);
         right: 0px;
-        bottom: -120px;
+        bottom: -60px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -56,10 +55,7 @@ const Wrapper = styled(BaseDialogStyle)`
           font-size: ${(props) => props.theme.fontSizes.bodyL};
           height: 50%;
           text-align: left;
-          color: ${(props) => props.theme.colors.alternativeTextColor};
-          &:last-child {
-            color: ${(props) => props.theme.colors.deleteColor};
-          }
+          color: ${(props) => props.theme.colors.deleteColor};
         }
       }
     }
@@ -170,7 +166,6 @@ const ViewTask = ({ refProp }: { refProp: RefObject<HTMLDialogElement> }) => {
             onClick={() => refMenu.current?.classList.toggle("active")}
           />
           <div className="menu" ref={refMenu}>
-            <button>Edit Task</button>
             <button onClick={deleteTask}>Delete Task</button>
           </div>
         </div>
