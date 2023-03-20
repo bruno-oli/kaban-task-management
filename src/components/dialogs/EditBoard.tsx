@@ -76,7 +76,7 @@ const EditBoard = ({
     function getColumnNameLength() {
       let error = false;
       columns?.forEach((i) => {
-        if (i.name.length < 4 && i.name.length > 20) {
+        if (i.name.length < 4 || i.name.length > 20) {
           error = true;
         }
       });
