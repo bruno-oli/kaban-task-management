@@ -39,7 +39,7 @@ const INITIAL_BOARDS_VALUE: IContext = {
       id: crypto.randomUUID(),
       name: "Welcome!",
       columns: [],
-      active: false,
+      active: true,
     },
   ],
   setBoards: () => {},
