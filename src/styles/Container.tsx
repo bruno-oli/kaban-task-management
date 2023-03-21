@@ -6,7 +6,7 @@ const Wrapper = styled.main`
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: 40% 60%;
+  grid-template-columns: 20% 80%;
   grid-template-rows: 12% 88%;
   grid-template-areas:
     "header header"
@@ -19,6 +19,9 @@ const Wrapper = styled.main`
       transition: opacity 0.6s;
       opacity: 0;
     }
+  }
+  @media only screen and (max-width: 900px)  {
+    grid-template-columns: 40% 60%;
   }
 `;
 
