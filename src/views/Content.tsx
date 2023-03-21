@@ -50,7 +50,7 @@ const Wrapper = styled.div`
     }
   }
   .coloumns {
-    width: 100%;
+    width: 200%;
     height: 100%;
     display: flex;
     justify-content: space-between;

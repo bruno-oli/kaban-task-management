@@ -28,6 +28,7 @@ const Wrapper = styled.div`
     font-size: ${(props) => props.theme.fontSizes.headingX};
     color: ${(props) => props.theme.colors.alternativeTextColor};
     font-weight: bold;
+    text-align: center;
   }
 `;
 
