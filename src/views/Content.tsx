@@ -45,6 +45,7 @@ const Wrapper = styled.div`
         font-family: ${(props) => props.theme.fontSizes.headingL};
         font-weight: bold;
         color: ${(props) => props.theme.colors.alternativeTextColor};
+        text-align: center;
       }
     }
   }
