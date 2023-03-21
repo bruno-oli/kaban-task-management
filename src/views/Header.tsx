@@ -52,6 +52,14 @@ const Wrapper = styled.header`
       }
     }
   }
+  @media only screen and (min-width: 768px) {
+    .logo__container {
+      min-width: 40%;
+    }
+    .content {
+      min-width: 60%;
+    }
+  }
 `;
 
 const Header = () => {
