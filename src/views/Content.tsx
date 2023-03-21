@@ -50,7 +50,7 @@ const Wrapper = styled.div`
     }
   }
   .coloumns {
-    width: 200%;
+    width: 100%;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -77,6 +77,11 @@ const Wrapper = styled.div`
         flex-direction: column;
         gap: 20px;
       }
+    }
+  }
+  @media only screen and (max-width: 768px)  {
+    .coloumns {
+      width: 200%;
     }
   }
 `;
